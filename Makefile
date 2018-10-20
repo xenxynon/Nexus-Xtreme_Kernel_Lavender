@@ -686,7 +686,7 @@ KBUILD_CFLAGS	+= $(call cc-disable-warning, attribute-alias)
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= -Os
 else
-KBUILD_CFLAGS	+= -O3
+KBUILD_CFLAGS	+= -O3 -floop-nest-optimize -fgraphite-identity -ftree-loop-distribution
 endif
 
 ifdef CONFIG_CC_WERROR
