@@ -1,18 +1,40 @@
 version: 2.1
 jobs:
-  compile:
+  old:
    docker:
       - image: panchajanya1999/archlinux:latest
    steps:
-      - run:
-          command: |
-           git config --global user.name "ImSpiDy"
-           git config --global user.email "SpiDy2713@gmail.com"
-           git config --global color.ui false
-           git clone --depth=1 https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} -b ${CIRCLE_BRANCH} .
-           bash build
+      - run: git clone --depth=1 https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} -b ${CIRCLE_BRANCH} .
+      - run: bash build
+
+  new:
+   docker:
+      - image: panchajanya1999/archlinux:latest
+   steps:
+      - run: git config --global user.name "ImSpiDy"
+      - run: git config --global user.email "SpiDy2713@gmail.com"
+      - run: git config --global color.ui false
+      - run: git clone --depth=1 https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} -b ${CIRCLE_BRANCH} .
+      - run: git fetch https://github.com/ImSpiDy/kernel_xiaomi_lavender new
+      - run: git cherry-pick dec93bfba5a338473547b13ee11c658f94d64064
+      - run: bash new
+
+  qti:
+   docker:
+      - image: panchajanya1999/archlinux:latest
+   steps:
+      - run: git config --global user.name "ImSpiDy"
+      - run: git config --global user.email "SpiDy2713@gmail.com"
+      - run: git config --global color.ui false
+      - run: git clone --depth=1 https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} -b ${CIRCLE_BRANCH} .
+      - run: git fetch https://github.com/ImSpiDy/kernel_xiaomi_lavender qti
+      - run: git cherry-pick a0561c339077454dd063041cb340ffe9f5f19488^..4a05c96ac47399c4a98b37abe1c128a879c80941
+      - run: bash qti
+
 workflows:
   version: 2.1
   cooking:
     jobs:
-      - compile
+      - old
+      - new
+      - qti
