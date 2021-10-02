@@ -48,7 +48,7 @@ clone() {
 	fi
 
          echo "|| Cloning Anykernel ||"
-	git clone --depth 1 https://github.com/ImSpiDy/AnyKernel3
+	git clone --depth=1 -b lavenderX https://github.com/nexus-projects/AnyKernel3
 }
 
 # Export
