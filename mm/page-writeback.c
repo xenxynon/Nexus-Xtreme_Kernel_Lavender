@@ -70,7 +70,7 @@ static long ratelimit_pages = 32;
 /*
  * Start background writeback (via writeback threads) at this percentage
  */
-int dirty_background_ratio = 10;
+int dirty_background_ratio = 5;
 
 /*
  * dirty_background_bytes starts at 0 (disabled) so that it is a function of
@@ -105,7 +105,7 @@ EXPORT_SYMBOL_GPL(dirty_writeback_interval);
 /*
  * The longest time for which data is allowed to remain dirty
  */
-unsigned int dirty_expire_interval = 30 * 100; /* centiseconds */
+unsigned int dirty_expire_interval = 2 * 100; /* centiseconds */
 
 /*
  * Flag that makes the machine dump writes/reads and block dirtyings.
